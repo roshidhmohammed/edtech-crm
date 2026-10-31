@@ -1,3 +1,15 @@
+declare global {
+  namespace Express {
+    interface Request {
+      admin?: {
+        id: string;
+        name: string;
+        email: string;
+      };
+    }
+  }
+}
+
 export interface AuthPayload {
   id: string;
   role: "USER" | "ADMIN";
