@@ -1,0 +1,4 @@
+allowBuilds:
+  bcrypt: false
+  esbuild: false
+  workerd: false

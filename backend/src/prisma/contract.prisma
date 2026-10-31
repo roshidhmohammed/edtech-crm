@@ -1,0 +1,59 @@
+// use prisma-8
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserType {
+  parent
+  student
+  school
+}
+
+enum InquiryCategory {
+  scholarship
+  concert
+  admission
+  general_query
+}
+
+enum InquiryStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id           Uuid         @id @onCreate(uuid())
+  name         VarChar(150)
+  email        VarChar(255) @unique
+  passwordHash String       @map("password_hash")
+  role         Role         @default(USER)
+  isActive     Boolean      @default(true) @map("is_active")
+  createdAt DateTime @onCreate(now()) @map("created_at")
+  updatedAt DateTime @onCreate(now()) @onUpdate(now()) @map("updated_at")
+
+  @@index([role])
+  @@map("users")
+}
+
+model Inquiry {
+  id          Uuid          @id @onCreate(uuid())
+  name        VarChar(150)
+  email       VarChar(255)  @unique
+  phoneNumber VarChar(20)   @map("phone_number")
+  userType    UserType      @map("user_type")
+  category    InquiryCategory
+  message     String
+  status      InquiryStatus @default(PENDING)
+  createdAt DateTime @onCreate(now()) @map("created_at")
+  updatedAt DateTime @onCreate(now()) @onUpdate(now()) @map("updated_at")
+
+  @@index([category])
+  @@index([userType])
+  @@index([phoneNumber])
+  @@index([name])
+  @@map("inquiries")
+}
