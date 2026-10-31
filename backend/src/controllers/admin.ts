@@ -1,9 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
-import { db } from "../prisma/db";
-import AppError from "../middlewares/appError";
-import { comparePassword } from "../utils/comparePassword";
-import { generateaccessToken } from "../utils/generateaccessToken";
-import env from "../config/env";
+import { db } from "../prisma/db.js";
+import AppError from "../middlewares/appError.js";
+import { comparePassword } from "../utils/comparePassword.js";
+import { generateaccessToken } from "../utils/generateaccessToken.js";
+import env from "../config/env.js";
 
 export const login = async (
   req: Request,

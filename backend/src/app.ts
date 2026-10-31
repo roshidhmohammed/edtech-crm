@@ -1,9 +1,9 @@
 import express, { type Express, type Request, type Response } from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser"
-import { adminRouter } from "./routes/admin";
-import { inquiryRouter } from "./routes/inquiry";
-import errorHandler from "./middlewares/errorHandler";
+import { adminRouter } from "./routes/admin.js";
+import { inquiryRouter } from "./routes/inquiry.js";
+import errorHandler from "./middlewares/errorHandler.js";
 import cors from "cors";
 
 const app: Express = express();

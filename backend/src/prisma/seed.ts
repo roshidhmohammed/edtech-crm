@@ -1,6 +1,6 @@
-import env from "../config/env";
-import { isStrong } from "../utils/validations/password";
-import { db } from "./db";
+import env from "../config/env.js";
+import { isStrong } from "../utils/validations/password.js";
+import { db } from "./db.js";
 import bcrypt from "bcrypt";
 
 // const prisma = new PrismaClient();

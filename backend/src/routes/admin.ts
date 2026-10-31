@@ -1,7 +1,7 @@
 import  Express  from "express";
-import asyncCatchError from "../middlewares/asyncCatchError";
-import { getProfileDetails, login } from "../controllers/admin";
-import { isAdminAuthenticated } from "../middlewares/authorization/admin";
+import asyncCatchError from "../middlewares/asyncCatchError.js";
+import { getProfileDetails, login } from "../controllers/admin.js";
+import { isAdminAuthenticated } from "../middlewares/authorization/admin.js";
 
 export const adminRouter =Express.Router()
 

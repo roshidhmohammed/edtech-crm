@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
 
 import AppError from "../appError.js";
-import env from "../../config/env";
+import env from "../../config/env.js";
 import { db } from "../../prisma/db.js";
-import { AuthPayload } from "../../types/index.js";
+import type { AuthPayload } from "../../types/index.js";
 
 
 export const isAdminAuthenticated = async (

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import { db } from "../prisma/db";
-import AppError from "../middlewares/appError";
+import { db } from "../prisma/db.js";
+import AppError from "../middlewares/appError.js";
 
 const CATEGORIES = [
   "scholarship",

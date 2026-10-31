@@ -1,6 +1,6 @@
-import app from "./app";
-import { db } from "./prisma/db";
-import env from "./config/env";
+import app from "./app.js";
+import { db } from "./prisma/db.js";
+import env from "./config/env.js";
 
 const PORT = Number(env.PORT) ;
 

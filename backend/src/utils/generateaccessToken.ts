@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import AppError from "../middlewares/appError"
+import AppError from "../middlewares/appError.js"
 import env from "../config/env.js"
 
 const JWT_SECRET = env.JWT_SECRET
