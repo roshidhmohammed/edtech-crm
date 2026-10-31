@@ -1,6 +1,5 @@
 import AdminHeader from '@/admin/layouts/AdminHeader';
 import { AdminSidebar } from '@/admin/layouts/AdminSidebar';
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 

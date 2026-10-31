@@ -1,5 +1,4 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Admin, AuthState } from "../../types/adminPayload";
 import type { InquiriesState, Inquiry } from "../types";
 
 const initialState: InquiriesState = {

@@ -16,13 +16,39 @@ import { Badge } from "@/components/ui/badge";
 import Stats from "./Stats";
 import InquiryTable from "./InquiryTable";
 import useFetchInquiries from "../hooks/useFetchInquiries";
-import { INQUIRIES_PAGE_SIZE } from "../constants";
+import {
+  CATEGORY_LABELS,
+  INQUIRIES_PAGE_SIZE,
+  USER_TYPE_LABELS,
+} from "../constants";
+import type {
+  InquiryCategoryFilter,
+  UserTypeFilter,
+} from "../types";
+
+function isCategoryFilter(
+  value: string | null,
+): value is InquiryCategoryFilter {
+  return (
+    value === "all" ||
+    (value !== null && Object.hasOwn(CATEGORY_LABELS, value))
+  );
+}
+
+function isUserTypeFilter(value: string | null): value is UserTypeFilter {
+  return (
+    value === "all" ||
+    (value !== null && Object.hasOwn(USER_TYPE_LABELS, value))
+  );
+}
 
 export default function AdminDashboard() {
-  const [search, setSearch] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("all");
-  const [userTypeFilter, setUserTypeFilter] = useState("all");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] =
+    useState<InquiryCategoryFilter>("all");
+  const [userTypeFilter, setUserTypeFilter] =
+    useState<UserTypeFilter>("all");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const {
     data,
     error,
@@ -106,6 +132,7 @@ export default function AdminDashboard() {
             <Select
               value={categoryFilter}
               onValueChange={(value) => {
+                if (!isCategoryFilter(value)) return;
                 setCategoryFilter(value);
                 setCurrentPage(1);
               }}
@@ -126,6 +153,7 @@ export default function AdminDashboard() {
             <Select
               value={userTypeFilter}
               onValueChange={(value) => {
+                if (!isUserTypeFilter(value)) return;
                 setUserTypeFilter(value);
                 setCurrentPage(1);
               }}

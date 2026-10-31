@@ -6,6 +6,9 @@ export type InquiryCategory =
   | "admission"
   | "general_query";
 
+export type InquiryCategoryFilter = InquiryCategory | "all";
+export type UserTypeFilter = UserType | "all";
+
 export type InquiryStatus =
   | "PENDING"
   | "IN_PROGRESS"
