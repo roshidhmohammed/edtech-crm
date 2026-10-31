@@ -9,7 +9,7 @@ import cors from "cors";
 const app: Express = express();
 const PORT = 8000;
 app.use(cors({
-  origin:["http://localhost:5173", "https://edtech-crm-v7w2-nine.vercel.app/"],
+  origin:["http://localhost:5173", "https://edtech-crm-v7w2-nine.vercel.app"],
    credentials: true
 }))
 
