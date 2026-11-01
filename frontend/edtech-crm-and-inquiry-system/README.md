@@ -1,75 +1,101 @@
-# React + TypeScript + Vite
+# EdTech CRM and Inquiry System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An inquiry submission site and admin dashboard built with React, Vite, Express, and PostgreSQL.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js
+- pnpm
+- PostgreSQL 15 or newer
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open two terminals from the repository root.
 
-## Expanding the ESLint configuration
+### 1. Configure and run the backend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```powershell
+cd backend
+pnpm install
+Copy-Item .env.example .env.development
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Edit `backend/.env.development` and set the values described below. Make sure the PostgreSQL database exists and its schema has been initialized before starting the API.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the API:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+pnpm dev
+```
 
+The backend listens on port `8000` by default. Keep this terminal running.
+
+### 2. Configure and run the frontend
+
+In the second terminal, from the repository root:
+
+```powershell
+cd frontend/edtech-crm-and-inquiry-system
+pnpm install
+Copy-Item .env.example .env
+```
+
+Set `VITE_BACKEND_URL` in `frontend/edtech-crm-and-inquiry-system/.env` to:
+
+```env
+VITE_BACKEND_URL="http://localhost:8000/api"
+```
+
+Start the frontend:
+
+```powershell
+pnpm dev
+```
+
+Open the local URL printed by Vite (by default, `http://localhost:5173`). The admin login page is at `/admin/login`.
+
+## Environment variables
+
+### Backend: `backend/.env.development`
+
+Copy `backend/.env.example` to `backend/.env.development` and provide:
+
+| Variable | Description |
+| --- | --- |
+| `NODE_ENV` | Use `development` for local work. |
+| `PORT` | Backend port; use `8000` for the frontend URL above. |
+| `DATABASE_URL` | PostgreSQL connection string. |
+| `ADMIN_PASSWORD` | Strong password used when seeding the local admin account. |
+| `JWT_SECRET` | Secret used to sign and verify admin authentication tokens. |
+
+Keep database credentials, admin passwords, and JWT secrets private. Do not commit environment files.
+
+To create the default local admin account after the database schema is initialized:
+
+```powershell
+cd backend
+pnpm seed
+```
+
+The seeded account email is `admin@example.com`; its password is the `ADMIN_PASSWORD` value.
+
+### Frontend: `frontend/edtech-crm-and-inquiry-system/.env`
+
+Copy `.env.example` to `.env` and set:
+
+| Variable | Description |
+| --- | --- |
+| `VITE_BACKEND_URL` | Backend API base URL, including `/api`; locally use `http://localhost:8000/api`. |
+
+Vite reads frontend environment variables when it starts. Restart the dev server after changing `.env`.
+
+## Useful frontend commands
+
+Run these from `frontend/edtech-crm-and-inquiry-system`:
+
+```powershell
+pnpm dev       # Start the Vite development server
+pnpm build     # Type-check and create the production bundle
+pnpm preview   # Preview the production bundle locally
+pnpm lint      # Run ESLint
 ```
