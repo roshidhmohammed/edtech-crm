@@ -1,3 +1,5 @@
+import "temporal-polyfill/full/global";
+
 import express, { type Express, type Request, type Response } from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser"
