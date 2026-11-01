@@ -12,7 +12,6 @@ export const login = async (
 ) => {
   try {
     const { email, password } = req.body;
-    console.log(email)
 
     const isAdmin = await db.orm.public.User.where({ email: email }).first();
     if (!isAdmin) {
@@ -55,7 +54,6 @@ export const login = async (
 export const getProfileDetails = async(req:Request , res:Response ,next:NextFunction) => {
     try {
         const admin = req.admin
-        console.log(admin)
         return res.status(200).json({
             success: true,
             message:"successfully fetched user details",

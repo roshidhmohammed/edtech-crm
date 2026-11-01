@@ -34,7 +34,6 @@ export const submit = async (
       data: inquiry,
     });
   } catch (error) {
-    console.log(error);
     return next(error);
   }
 };
